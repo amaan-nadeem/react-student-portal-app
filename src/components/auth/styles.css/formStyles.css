@@ -1,0 +1,67 @@
+.form form{
+    position: relative;
+    width: 60vw;
+    top: 25%;
+    left: 10%;
+    text-align: center;
+}
+
+.form h1{
+    width: 100%;
+    text-align: center;
+    padding-top: 14vh;
+    padding-bottom: 5vh;
+    color: teal;
+}
+
+
+/* Login Form */
+.login-form form{
+    position: relative;
+    height: 50vh;
+    width: 40vw;
+    top: 50%;
+    left: 30%;
+    text-align: center;
+}
+.login-form h1{
+    width: 100%;
+    text-align: center;
+    padding-top: 14vh;
+    color: teal;
+}
+
+
+@media(max-width: 1200px){
+    .login-form form{
+        width: 40%;
+    }
+}
+
+@media(max-width:900px){
+    .login-form form{
+        width: 50%;
+    }
+    .form form{
+        top: 35%;
+        left: 16%;
+    }
+    .login-form form{
+        left: 25%;
+    }
+}
+
+@media(max-width: 600px){
+    .error{
+        margin-left: -4vw !important;
+    }
+    .login-form form{
+        width: 60%;
+        left: 20%;
+    }
+    .login-form h1{
+        width: 100%;
+        text-align: center;
+    }
+
+}

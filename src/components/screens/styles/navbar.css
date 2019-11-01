@@ -1,0 +1,146 @@
+/* Generalized CSS for all navbars */
+
+*{
+    padding: 0;
+    margin: 0;
+}
+.logo{
+    margin-left: 10vw;
+}
+
+.navbar{
+    position: fixed !important;
+    background-color: black;
+    width: 100%;
+    z-index: 2 !important;
+    padding: 0 !important;
+}
+.navlinks{
+margin-right: 10vw;
+}
+
+.dropDownNavlinks{
+margin-right: 10vw;
+}
+.dropDownNavlinks ul{
+    display: flex;
+}
+
+.dropDownNavlinks ul .link{
+    font-size: 18px;
+    text-decoration: none;
+    color: rgb(182, 177, 177);
+        font-weight: bold;
+}
+.navlinks ul{
+    display: flex;
+    align-items: center;
+}
+.navlinks ul .link{
+    font-size: 18px;
+    text-decoration: none;
+        color: rgb(182, 177, 177);
+        font-weight: bold;
+        margin-right: 25px;
+        
+}
+
+.navlinks ul .link:hover{
+    border: 1px solid white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+button{
+    display: none;
+}
+
+
+@media(max-width: 900px){
+    .navbar{
+        background-color: rgb(17, 10, 10);
+        position: relative !important;
+        display: block;
+    }
+    .navlinks{
+        display: none;
+    }
+    .dropDownNavlinks{
+        margin: 0;
+        width: 100%;
+    }
+    .dropDownNavlinks ul{
+        display: block;
+        font-size: 20px;
+    }
+    .dropDownNavlinks ul .link{
+        text-decoration: none;
+        color: grey;
+        font-weight: bold;
+        border-bottom: 1px solid grey;
+    }
+    .dropDownNavlinks ul .link:last-child{
+        border-bottom: none;
+    }
+    button{
+        display: inline-block;
+        border: none;
+        background-color: grey;
+        margin-right: 3vw !important;
+        outline: none !important;
+    }
+    button i{
+        font-size: 35px;
+
+    }
+    .logo{
+        margin-left: 1vw;
+    }
+}
+
+.profile-link{
+    background-color: rgb(245, 57, 94);
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+.profile-link:hover{
+    background-color: lightcoral;
+    border-radius: 30% !important;
+}
+
+/* Admin Logged-in links styling */
+.logout{
+    border: none !important;
+    font-weight: bold !important;
+    font-size: 17px !important;
+}
+
+.logout-s-screen{
+    display: none !important;
+}
+
+.profile-s-link{
+    display: none !important;
+}
+
+@media(max-width: 900px){
+    .profile-link{
+        display: none;
+    }
+    .profile-s-link{
+        display: block !important;
+        border-bottom: 1px solid gray;
+        color: gray;
+        font-weight: bold;
+    }
+    .logout-s-screen{
+        display: block !important;
+        background-color: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        font-weight: bold !important;
+        font-size: 20px !important;
+        color: gray !important;
+    }
+}

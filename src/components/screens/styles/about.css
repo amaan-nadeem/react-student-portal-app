@@ -1,0 +1,18 @@
+.about{
+    height: 80vh;
+    padding-top: 10vh;
+    padding-left: 20px;
+}
+
+.about h1{
+    color: red;
+}
+.about ul {
+    list-style-type:  square !important;
+}
+
+@media(max-width: 900px){
+    .about{
+        height: 100vh;
+    }
+}

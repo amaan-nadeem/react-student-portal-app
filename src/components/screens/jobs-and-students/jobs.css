@@ -1,0 +1,38 @@
+.each-company-jobs{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 10px 10px;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+
+.each-job{
+    border: 1px solid black;
+    padding: 20px;
+}
+
+.sub-jobs h1{
+    border-bottom: 5px solid rgb(14, 13, 13);
+    border-Top: 5px solid rgb(14, 13, 13);
+    padding-bottom: 5px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.each-job Button{
+    width: 100%;
+}
+
+.each-job span{
+    font-weight: bold;
+}
+.each-job p{
+    border-bottom: 1px solid gray;
+}
+
+
+@media(max-width: 1000px){
+    .each-company-jobs{
+     grid-template-columns: auto;   
+    }
+}

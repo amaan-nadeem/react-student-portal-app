@@ -1,0 +1,32 @@
+/* footer */
+.footer{
+    width: 100%;
+    background-color: gray;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+    position: relative !important;
+    bottom: 0 !important;
+}
+.footer Button i{
+    font-size: 30px;
+}
+
+
+@media(max-width: 768px){
+    .footer div{
+        width: 100%;
+        display: block !important;
+    }
+    .footer br{
+        display: none;
+    }
+    .footer div div{
+        margin-top: 4vh;
+    }
+}
+
+@media (max-width: 900px) {
+    .footer div{
+        display: block !important;
+    }
+}
