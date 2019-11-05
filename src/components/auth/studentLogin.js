@@ -39,7 +39,7 @@ class NormalLoginForm extends React.Component {
           );
          
            // login company in 
-          window.location.reload();
+           this.props.history.push('/dashboard');
         }
 
         // displaying backend error to user
@@ -87,6 +87,10 @@ class NormalLoginForm extends React.Component {
     if(this.state.token){
       return <Redirect to ={`/${this.state.name}`} />
     } 
+    
+    if(this.props.state.auth.token){
+      return <Redirect to='/dashboard'/>
+    }
 
 
     return (

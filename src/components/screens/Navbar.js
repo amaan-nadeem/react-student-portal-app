@@ -4,6 +4,7 @@ import AdminLoggedInLinks from "./loggedInLinks/AdminLoggedInLinks";
 import { connect } from "react-redux";
 import StudentLoggedInLinks from "./loggedInLinks/StudentLoggedInLinks";
 import CompanyLoggedInLinks from "./loggedInLinks/CompanyLoggedInLinks";
+import jwt_decode from "jwt-decode";
 
 class Navbar extends React.Component {
   state = {
@@ -32,6 +33,19 @@ class Navbar extends React.Component {
   }
 
   render() {
+    
+    if(this.props.auth.token){
+    const decode = jwt_decode(this.props.auth.token);
+    if(decode.student){
+      return <StudentLoggedInLinks/>
+    }
+    else if(decode.company){
+      return <CompanyLoggedInLinks/>
+    }
+    else if(decode.admin){
+      return <AdminLoggedInLinks/>
+    }
+    }
     if (this.state.name === "company") {
       return <CompanyLoggedInLinks />;
     } else if (this.state.name === "admin") {

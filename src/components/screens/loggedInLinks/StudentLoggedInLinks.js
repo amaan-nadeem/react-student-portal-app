@@ -11,6 +11,10 @@ import { Button } from "antd";
 import "./../styles/navbar.css";
 import Axios from "axios";
 import { Redirect, Link } from "react-router-dom";
+import jwt_decode from 'jwt-decode';
+import {connect} from 'react-redux';
+import { studentLogin } from "../../store/actions/authActions";
+
 
 class StudentLoggedInLinks extends React.Component {
   onClick = () => {
@@ -22,7 +26,7 @@ class StudentLoggedInLinks extends React.Component {
   };
 
   signout = () => {
-    localStorage.removeItem("STUDENT_TOKEN");
+    localStorage.removeItem('STUDENT_TOKEN');
     window.location.reload();
   };
 
@@ -64,6 +68,70 @@ class StudentLoggedInLinks extends React.Component {
   }
 
   render() {
+    if(this.props.auth.token){
+    const decode = jwt_decode(this.props.auth.token)
+        return (
+          <div className="navbar">
+            <div className="logo">
+              <NavbarBrand>
+                <img
+                  src={require("../../../images/logo.png")}
+                  width="100px"
+                  height="60px"
+                  alt="70px"
+                />
+              </NavbarBrand>
+            </div>
+            <button onClick={this.onClick}>
+              <i class="fas fa-angle-double-down"></i>
+            </button>
+            <div className="navlinks" id="navlinks">
+              <ul>
+                <Link className="link " to="/dashboard">
+                  Home
+                </Link>
+                <Link className="link " to="/companies">
+                  Companies
+                </Link>
+                <Link className="link " to="/jobs">
+                  Jobs
+                </Link>
+                <Link className="link " to="/applied-jobs">
+                 Applied Jobs
+                </Link>
+                <UncontrolledDropdown className="profile-link link">
+                  <DropdownToggle
+                    style={{ color: "black", fontWeight: "bold" }}
+                    nav
+                  >
+                    {decode.student.email[0].toUpperCase()}
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem>
+                      <Link to="/profile">Student Profile</Link>
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem>
+                      <Button className="logout" onClick={this.signout}>
+                        Logout
+                      </Button>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+                <Link className="profile-s-link" to="/profile">
+                  Student Profile
+                </Link>
+                <Link className="navlink-s-button">
+                  <Button className="logout-s-screen" onClick={this.signout}>
+                    Logout
+                  </Button>
+                </Link>
+              </ul>
+            </div>
+          </div>
+        );
+    }
+
     if (this.state.name === "student") {
       if (!this.state.isLoading) {
         return (
@@ -131,4 +199,12 @@ class StudentLoggedInLinks extends React.Component {
   }
 }
 
-export default StudentLoggedInLinks;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    student: student => dispatch(studentLogin(student))
+  }
+}
+const mapStateToProps = (state) => {
+  return state
+}
+export default connect(mapStateToProps, mapDispatchToProps)(StudentLoggedInLinks);

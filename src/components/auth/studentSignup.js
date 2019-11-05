@@ -91,7 +91,7 @@ class RegistrationForm extends React.Component {
             redirect: true
           });
 
-          window.location.reload();
+         this.props.history.push('/dashboard');
         }
 
         // displaying backend error to user
@@ -200,6 +200,11 @@ class RegistrationForm extends React.Component {
     if (this.state.token) {
       return <Redirect to={`/${this.state.name}`} />;
     }
+    
+    if(this.props.state.auth.token){
+      return <Redirect to='/dashboard'/>
+    }
+
 
     return (
       <div className="form">

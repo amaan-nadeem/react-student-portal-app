@@ -41,7 +41,8 @@ class NormalLoginForm extends React.Component {
           this.setState({
             redirect: true
           })
-          window.location.reload();
+
+          this.props.history.push('/dashboard');
         }
 
 
@@ -90,6 +91,9 @@ class NormalLoginForm extends React.Component {
       return <Redirect to ={`/${this.state.name}`} />
     } 
 
+    if(this.props.state.auth.token){
+      return <Redirect to = '/dashboard'/>
+    }
     return (
       <div className="login-form">
         <h1>Admin Login</h1>

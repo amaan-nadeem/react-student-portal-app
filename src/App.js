@@ -20,6 +20,9 @@ import CreatedJobs from "./components/screens/create-and-created-jobs/createdJob
 import ApplyForJobs from "./components/screens/create-and-created-jobs/apply-job/ApplyForJob";
 import JobApplications from "./components/screens/jobs-and-students/jobApplications";
 import AppliedJobs from "./components/screens/create-and-created-jobs/apply-job/appliedJobs";
+import {connect} from 'react-redux';
+import jwt_decode from 'jwt-decode';
+
 
 class App extends React.Component {
   componentWillMount() {
@@ -40,8 +43,40 @@ class App extends React.Component {
         name: "footer"
       });
     }
+    console.log(this.props);
   }
   render() {
+    
+    if(this.props.auth.token){
+      return (
+        <React.Fragment>
+          <Router>
+            <Navbar />
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/student-signup" component={StudentSignup} />
+              <Route path="/company-signup" component={CompanySignup} />
+              <Route path="/admin-login" exact component={AdminLogin} />
+              <Route path="/company-login" component={CompanyLogin} />
+              <Route path="/student-login" component={StudentLogin} />
+              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/companies" component={Companies} />
+              <Route path="/jobs" component={Jobs} />
+              <Route path="/students" component={Students} />
+              <Route path="/about" component={About} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/create-jobs" component={CreateJob} />
+              <Route path="/created-jobs" component={CreatedJobs} />
+              <Route path="/apply-jobs" component={ApplyForJobs} />
+              <Route path="/job-applications" component={JobApplications} />
+              <Route path="/applied-jobs" component={AppliedJobs} />
+            </Switch>
+            {!this.props.auth.token ? <Footer /> : <></>}
+          </Router>
+        </React.Fragment>
+      );
+      }
+    
     return (
       <React.Fragment>
         <Router>
@@ -72,4 +107,7 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return state
+}
+export default connect(mapStateToProps)(App);

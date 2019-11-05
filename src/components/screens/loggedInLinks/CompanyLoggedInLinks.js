@@ -11,6 +11,9 @@ import "./../styles/navbar.css";
 import { Button } from "antd";
 import Axios from "axios";
 import { Redirect, Link } from "react-router-dom";
+import { connect } from "react-redux";
+import jwt_decode from 'jwt-decode';
+
 
 class CompanyLoggedInLinks extends React.Component {
   onClick = () => {
@@ -64,6 +67,73 @@ class CompanyLoggedInLinks extends React.Component {
   }
 
   render() {
+    if(this.props.auth.token){
+      const decode = jwt_decode(this.props.auth.token);
+
+      if(decode.company){
+        return (
+          <div className="navbar">
+            <div className="logo">
+              <NavbarBrand>
+                <img
+                  src={require("../../../images/logo.png")}
+                  width="100px"
+                  height="60px"
+                  alt="70px"
+                />
+              </NavbarBrand>
+            </div>
+            <button onClick={this.onClick}>
+              <i class="fas fa-angle-double-down"></i>
+            </button>
+            <div className="navlinks" id="navlinks">
+              <ul>
+                <Link className="link " to="/dashboard">
+                  Home
+                </Link>
+                <Link className="link " to="/created-jobs">
+                  Created Jobs
+                </Link>
+                <Link className="link " to="/create-jobs">
+                  Create Job
+                </Link>
+                <Link className="link " to="/job-applications">
+                  Job Applications
+                </Link>
+                <UncontrolledDropdown className="profile-link link">
+                  <DropdownToggle
+                    style={{ color: "black", fontWeight: "bold" }}
+                    nav
+                  >
+                    {decode.company.email[0].toUpperCase()}
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem>
+                      <Link to="/profile">Company Profile</Link>
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem>
+                      <Button className="logout" onClick={this.signout}>
+                        Logout
+                      </Button>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+                <Link className="profile-s-link" to="/profile">
+                  Company Profile
+                </Link>
+                <Link className="navlink-s-button">
+                  <Button className="logout-s-screen" onClick={this.signout}>
+                    Logout
+                  </Button>
+                </Link>
+              </ul>
+            </div>
+          </div>
+        );
+      }
+    }
+
     if (this.state.name === "company") {
       if (!this.state.isLoading) {
         return (
@@ -130,4 +200,8 @@ class CompanyLoggedInLinks extends React.Component {
     } else return <Redirect to="/" />;
   }
 }
-export default CompanyLoggedInLinks;
+const mapStateToProps = state => {
+  return state;
+};
+
+export default connect(mapStateToProps)(CompanyLoggedInLinks);

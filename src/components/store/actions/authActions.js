@@ -31,6 +31,16 @@ const adminLogin = (admin) => {
 const studentLogin = (student) => {
     return async(dispatch, getState) => {
         try {
+
+            if(!student){
+              dispatch({
+                token: false,
+                payload: false,
+                type: actiontTypes.studentLoginFailed
+              })
+            }
+
+
             const response = await Axios.post(
               "https://jobzillaa.herokuapp.com/api/v1/student/login",
               {

@@ -34,7 +34,7 @@ class JobApplications extends React.Component {
        // checking jobs
        if(response.data.jobApplications.length === 0){
          this.setState({
-            error: 'No Student Yet Applied to any of your Created jobs'
+            error: 'No Student Yet Applied to any of your Created job'
         })
     } else {
         this.setState({
@@ -131,7 +131,7 @@ class JobApplications extends React.Component {
                               return <em>{major}</em> 
                           })}
                       </p>
-                   <Button onClick={() => this.Delete(student._id, index)}>Delete</Button>
+                   <Button onClick={() => this.Delete(student._id, index)}>Accept</Button>
                     </div>
                   )
                 })}
