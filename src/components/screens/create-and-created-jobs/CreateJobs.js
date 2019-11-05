@@ -1,10 +1,10 @@
 import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import "./createJobs.css";
-import { createJob } from "../../store/actions/jobActions";
+import { createJob, jobToEdit } from "../../store/actions/jobActions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-
+import Axios from "axios";
 
 class CreateJob extends React.Component {
   constructor(props) {
@@ -39,24 +39,113 @@ class CreateJob extends React.Component {
 
     if (this.props.state.job.authError === "Job Successfully Created") {
       localStorage.setItem("SUCCESS", "success");
-      this.props.history.push('/created-jobs');
+      this.props.history.push("/created-jobs");
+    } else if (this.props.state.job.authError === "Job Failed") {
+      this.setState({
+        error: "Please check your Internet Connection"
+      });
+    }
+  };
+
+  edit = async e => {
+    e.preventDefault();
+    const token = localStorage.getItem("COMPANY_TOKEN");
+    if (
+      !this.state.requiredPosition &&
+      this.state.requiredExperience.length >= 1
+    ) {
+      await Axios.put(
+        `https://jobzillaa.herokuapp.com/api/v1/jobs/edit-job/5db984e22578d3001745a941`,
+        {
+          requiredExperience: this.state.requiredExperience
+        },
+        {
+          headers: { "x-auth-header": token }
+        }
+      );
+
+      this.setState({
+        error: "Job Updated"
+      });
+      // directing the user to created jobs url
+      setTimeout(() => {
+        this.props.history.push("/created-jobs");
+      }, 500);
+    } else if (
+      !this.state.requiredExperience &&
+      this.state.requiredPosition.length >= 1
+    ) {
+      await Axios.put(
+        `https://jobzillaa.herokuapp.com/api/v1/jobs/edit-job/5db984e22578d3001745a941`,
+        {
+          requiredPosition: this.state.requiredPosition
+        },
+        {
+          headers: { "x-auth-header": token }
+        }
+      );
+
+      this.setState({
+        error: "Job Updated"
+      });
+      // directing the user to created jobs url
+      setTimeout(() => {
+        this.props.history.push("/created-jobs");
+      }, 500);
+    } else if (this.state.requiredExperience && this.state.requiredPosition) {
+      await Axios.put(
+        `https://jobzillaa.herokuapp.com/api/v1/jobs/edit-job/5db984e22578d3001745a941`,
+        {
+          requiredExperience: this.state.requiredExperience,
+          requiredPosition: this.state.requiredPosition
+        },
+        {
+          headers: { "x-auth-header": token }
+        }
+      );
+
+      this.setState({
+        error: "Job Updated"
+      });
+      // directing the user to created jobs url
+      setTimeout(() => {
+        this.props.history.push("/created-jobs");
+      }, 500);
+    } else {
+      this.setState({
+        error: "Field are empty nothing to be updated"
+      });
     }
   };
 
   componentWillMount() {
-   
+    this.setState({
+      jobToEdit: this.props.state.job.data
+    });
+
     if (localStorage.getItem("COMPANY_TOKEN")) {
       this.setState({
         name: "company"
       });
     }
   }
+
+  componentWillUnmount() {
+    this.props.id(false);
+    this.setState({
+      jobToEdit: false
+    });
+  }
+
   render() {
-    if (this.state.name === 'company') {
+    if (this.state.name === "company") {
       return (
         <div className="job-div">
           <h1>Create A Job</h1>
-          <Form className="job-form" onSubmit={this.onSubmit}>
+          <Form
+            className="job-form"
+            onSubmit={!this.state.jobToEdit ? this.onSubmit : this.edit}
+          >
             <FormGroup>
               <Label for="requiredPostion">Required Position</Label>
               <Input
@@ -81,7 +170,11 @@ class CreateJob extends React.Component {
                 }
               />
             </FormGroup>
-            <Button>Submit</Button>
+            {!this.state.jobToEdit ? (
+              <Button>Submit</Button>
+            ) : (
+              <Button>Edit</Button>
+            )}
             <p
               style={{ color: "red", textAlign: "center", paddingTop: "10px" }}
             >
@@ -102,7 +195,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    job: job => dispatch(createJob(job))
+    job: job => dispatch(createJob(job)),
+    id: id => dispatch(jobToEdit(id))
   };
 };
 

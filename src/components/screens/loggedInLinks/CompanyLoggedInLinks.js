@@ -104,7 +104,7 @@ class CompanyLoggedInLinks extends React.Component {
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem>
-                      <Link href="/company-profile">Company Profile</Link>
+                      <Link to="/profile">Company Profile</Link>
                     </DropdownItem>
                     <DropdownItem divider />
                     <DropdownItem>
@@ -114,7 +114,7 @@ class CompanyLoggedInLinks extends React.Component {
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
-                <Link className="profile-s-link" href="/company-profile">
+                <Link className="profile-s-link" to="/profile">
                   Company Profile
                 </Link>
                 <Link className="navlink-s-button">

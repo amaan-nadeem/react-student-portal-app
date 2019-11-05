@@ -104,7 +104,7 @@ class AdminLoggedInLinks extends React.Component {
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem>
-                      <Link href="/admin-profile">Admin Profile</Link>
+                      <Link to="/profile">Admin Profile</Link>
                     </DropdownItem>
                     <DropdownItem divider />
                     <DropdownItem>

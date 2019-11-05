@@ -3,12 +3,15 @@ import Axios from "axios";
 import "./createJobs.css";
 import moment from "moment";
 import { Redirect } from "react-router-dom";
+import { Button } from "antd";
+import { jobToEdit } from "../../store/actions/jobActions";
+import { connect } from "react-redux";
 
 class CreatedJobs extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: ''
+      error: ""
     };
   }
 
@@ -27,14 +30,14 @@ class CreatedJobs extends React.Component {
         }
       );
 
-      if(response.data.jobs.length === 0){
+      if (response.data.jobs.length === 0) {
         this.setState({
           error: `You have'nt Created any Job.`
-        })
-      }else {
+        });
+      } else {
         this.setState({
-          error: ''
-        })
+          error: ""
+        });
       }
       this.setState({
         jobs: response.data.jobs,
@@ -43,6 +46,10 @@ class CreatedJobs extends React.Component {
     }
   }
 
+  edit(index) {
+    this.props.id(index);
+    this.props.history.push("/create-jobs");
+  }
 
   render() {
     if (this.state.name === "company") {
@@ -55,25 +62,54 @@ class CreatedJobs extends React.Component {
         );
       }
       return (
-          <div className="jobs-company-div">
-            <h1>Created Jobs</h1>
-            {!this.state.error ? 
-              <div className="each-company-jobs-main-div">
+        <div className="jobs-company-div">
+          <h1>Created Jobs</h1>
+          {!this.state.error ? (
+            <div className="each-company-jobs-main-div">
               {this.state.jobs.map(job => {
                 return (
                   <div className="each-company-jobs-sub-div">
-                    <p><span>Required Position:</span> {job.requiredPosition}</p>
-                    <p><span>Required Experience:</span> {job.requiredExperience}</p>
-                    <p><span>Job Created At:</span> {moment(job.createdAt).format("LLL")}</p>
+                    <p>
+                      <span>Required Position:</span> {job.requiredPosition}
+                    </p>
+                    <p>
+                      <span>Required Experience:</span> {job.requiredExperience}
+                    </p>
+                    <p>
+                      <span>Job Created At:</span>{" "}
+                      {moment(job.createdAt).format("LLL")}
+                    </p>
+                    <Button
+                      style={{ width: "100%", backgroundColor: "lightBlue" }}
+                      onClick={() => this.edit(job._id)}
+                    >
+                      EDIT
+                    </Button>
                   </div>
                 );
               })}
-            </div> :<p style={{textAlign:'center', fontWeight:'bold', padding:'5px', fontSize: '20px'}}>{this.state.error}</p> }
-        
+            </div>
+          ) : (
+            <p
+              style={{
+                textAlign: "center",
+                fontWeight: "bold",
+                padding: "5px",
+                fontSize: "20px"
+              }}
+            >
+              {this.state.error}
+            </p>
+          )}
         </div>
       );
     } else return <Redirect to="/" />;
   }
 }
 
-export default CreatedJobs;
+const mapDispatchToProps = dispatch => {
+  return {
+    id: id => dispatch(jobToEdit(id))
+  };
+};
+export default connect(null, mapDispatchToProps)(CreatedJobs);

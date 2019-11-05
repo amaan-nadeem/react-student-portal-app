@@ -1,35 +1,50 @@
 .profile{
-    height: 90vh !important;
+    height: 100vh;
     width: 100%;
     padding-top: 100px;
+    background-image: url('../../../images/b.jpg') !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 
 }
+
 
 .company{
     display: flex;
     flex-direction: column;
-    width: 55vw;
-    margin: auto;
+    width: 40vw;
+    margin: 0 auto;
     border: 1px solid black;
+    border-radius: 12px;
     padding: 20px;
     background: linear-gradient(to right, #ffafbd, #ffc3a0);
+    box-shadow: 10px 10px 20px rgb(116, 114, 114);
 }
 
 .company span{
     margin-top: -20px !important;
-    color: grey;
+    color: rgb(24, 20, 20);
     font-weight: 400;
     font-size: 24px;
 }
 .company h1{
     color: black;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 24px;
+    border-bottom: 1px solid grey;
+    padding-bottom: 5px;
+}
+
+.company-avatar{
+    text-align: center;
 }
 
 .profile-info{
 text-align: center;
 padding-bottom: 20px;
+font-size: 40px !important;
+color: rgb(241, 90, 36) !important;
 }
 
 .title{
@@ -38,3 +53,83 @@ padding-bottom: 20px;
 }
 
 
+
+@media(max-width: 1200px){
+    .company{
+        width: 70vw;
+    }
+}
+
+@media(max-width: 900px){
+    .profile{
+        background-image: url('../../../images/b-s.jpg') !important;
+    }
+}
+
+
+@media(max-width: 700px){
+    .company{
+        width: 90vw;
+    }
+}
+
+@media(max-width: 400px){
+    .company h1, .company span{
+        font-size: 20px; 
+    }
+    .profile-info{
+        font-size: 30px !important;
+    }
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 100px auto;
+  }
+  
+  .double-bounce1,
+  .double-bounce2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgb(36, 163, 163);
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+  
+    -webkit-animation: sk-bounce 2s infinite ease-in-out;
+    animation: sk-bounce 2s infinite ease-in-out;
+  }
+  
+  .double-bounce2 {
+    -webkit-animation-delay: -1s;
+    animation-delay: -1s;
+  }
+  
+  @-webkit-keyframes sk-bounce {
+    0%,
+    100% {
+      -webkit-transform: scale(0);
+    }
+    50% {
+      -webkit-transform: scale(1);
+    }
+  }
+  
+  @keyframes sk-bounce {
+    0%,
+    100% {
+      transform: scale(0);
+      -webkit-transform: scale(0);
+    }
+    50% {
+      transform: scale(1);
+      -webkit-transform: scale(1);
+    }
+  }

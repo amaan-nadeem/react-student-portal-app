@@ -19,11 +19,15 @@
 margin-right: 10vw;
 }
 
-.dropDownNavlinks{
-margin-right: 10vw;
+.dropDownNavlinks ul .link{
+margin-right: 2vw;
+}
+.dropDownNavlinks ul{
+    margin-right: 10vw;
 }
 .dropDownNavlinks ul{
     display: flex;
+    align-items: center;
 }
 
 .dropDownNavlinks ul .link{
@@ -70,10 +74,14 @@ button{
         width: 100%;
     }
     .dropDownNavlinks ul{
+        margin-right: 0;
         display: block;
         font-size: 20px;
     }
     .dropDownNavlinks ul .link{
+        margin-right: 0;
+        padding: 10px;
+        display: block;
         text-decoration: none;
         color: grey;
         font-weight: bold;
@@ -126,13 +134,18 @@ button{
 
 @media(max-width: 900px){
     .profile-link{
-        display: none;
+        display: none !important;
     }
     .profile-s-link{
         display: block !important;
         border-bottom: 1px solid gray;
         color: gray;
         font-weight: bold;
+        padding: 10px;
+        text-decoration: none !important;
+    }
+    .profile-s-link:hover{
+        color: gray;
     }
     .logout-s-screen{
         display: block !important;
@@ -142,5 +155,6 @@ button{
         font-weight: bold !important;
         font-size: 20px !important;
         color: gray !important;
+        padding: 10px !important;
     }
 }

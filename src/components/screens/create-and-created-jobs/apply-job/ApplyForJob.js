@@ -29,6 +29,8 @@ class ApplyForJobs extends React.Component {
         error: "Experience in Specified Field field is not allowed to be empty"
       });
     }
+
+    console.log(this.state.experienceInSpecifiedField);
     console.log(localStorage.getItem("JOB-ID"))
     const job = {
       totalExperience: this.state.totalExperience,
@@ -39,15 +41,24 @@ class ApplyForJobs extends React.Component {
 
     await this.props.job(job)
 
-    if(this.props.state.authError === "Job Application Successful"){
+    console.log(this.props);
+    if(this.props.state.job.authError === "Job Application Successful"){
       this.setState({
         error: "Job posted Successfully!"
       })
+      setTimeout(() => {
+        this.props.history.push('/applied-jobs');
+      }, 500);
     }
-    else if(this.props.state.authError === "Job Application Failure"){
-      console.log(this.props.state.job.error.response.data.message);
+    else if(this.props.state.job.authError === "Job Application Failure"){
+      if(this.props.state.job.error.response){
+        this.setState({
+          error: this.props.state.job.error.response.data.message
+        })
+      } else this.setState({
+        error: 'Please Check your Internet Connection'
+      })
     }
-    console.log(this.props);
    
   };
 

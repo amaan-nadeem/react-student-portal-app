@@ -182,10 +182,14 @@ class RegistrationForm extends React.Component {
 
           // displaying backend error to user
           if (this.props.state.auth.authError === "Company Signup Failed") {
-            console.log(this.props);
-            this.setState({
-              error: this.props.state.auth.error.response.data.message
-            });
+            if(this.props.state.auth.error.response){
+              this.setState({
+                error: this.props.state.auth.error.response.data.message
+              });
+            }
+            else this.setState({
+              error: 'Please check your Internet Connection'
+            })
           }
         }
       }

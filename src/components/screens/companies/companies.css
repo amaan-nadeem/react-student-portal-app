@@ -58,6 +58,9 @@
 .sub-companies button {
   width: 100%;
 }
+.sub-companies p:last-of-type{
+  border-bottom: none;
+}
 
 /* Loading screen stylying */
 

@@ -11,17 +11,22 @@ class Profile extends React.Component {
   }
 
   async componentWillMount() {
-     if (localStorage.getItem("COMPANY_TOKEN")) {
-         const token = localStorage.getItem("COMPANY_TOKEN");
-         const response = await Axios.get(
-             "https://jobzillaa.herokuapp.com/api/v1/company/profile",
-             {
-                 headers: { "x-auth-header": token }
-                }
-                );
-        this.setState({
+    if (localStorage.getItem("COMPANY_TOKEN")) {
+      this.setState({
+        isloading: true,
         name: "company"
-        });
+      });
+      const token = localStorage.getItem("COMPANY_TOKEN");
+      const response = await Axios.get(
+        "https://jobzillaa.herokuapp.com/api/v1/company/profile",
+        {
+          headers: { "x-auth-header": token }
+        }
+      );
+      this.setState({
+        isloading: false,
+        name: "company"
+      });
       const profile = response.data.companyProfile;
       this.setState({
         buisnessDetails: profile.buisnessDetails,
@@ -33,6 +38,7 @@ class Profile extends React.Component {
       });
     } else if (localStorage.getItem("STUDENT_TOKEN")) {
       this.setState({
+        isloading: true,
         name: "student"
       });
       const token = localStorage.getItem("STUDENT_TOKEN");
@@ -43,11 +49,30 @@ class Profile extends React.Component {
         }
       );
       this.setState({
-
-      })
+        isloading:false,
+        studentName: response.data.studentProfile.studentName,
+        fatherName:response.data.studentProfile.fatherName,
+        collegeName: response.data.studentProfile.collegeName,
+        email: response.data.studentProfile.email,
+        majors:response.data.studentProfile.majors,
+        gender: response.data.studentProfile.gender
+      });
     } else if (localStorage.getItem("ADMIN_TOKEN")) {
       this.setState({
+        isloading: true,
         name: "admin"
+      })
+      const token = localStorage.getItem("ADMIN_TOKEN");
+      const response = await Axios.get(
+        "https://jobzillaa.herokuapp.com/api/v1/admin/profile",
+        {
+          headers: { "x-auth-header": token }
+        }
+      );
+      this.setState({
+        isloading: false,
+        adminName: response.data.adminProfile.adminName,
+        email: response.data.adminProfile.email
       });
     } else {
       this.setState({
@@ -57,34 +82,64 @@ class Profile extends React.Component {
     }
   }
   render() {
+    console.log(this.state);
     const profile = this.state.name;
     if (profile === "admin") {
-      return (
-        <div className="profile">
-          <div className="avatar">
-            <img
-              src={require("../../../images/profile.png")}
-              style={{ borderRadius: "50%" }}
-              width="200px"
-              height="200px"
-            />
+      if(this.state.isloading){
+        return (
+          <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
           </div>
-
-          <h1 style={{ color: "black", fontWeight: "bold" }}>Amaan Nadeem</h1>
-          <h1 style={{ color: "crimson" }}>
-            EMAIL:{" "}
-            <span style={{ fontSize: "30px", color: "black" }}>
-              {" "}
-              amaannadeem@outlook.com
-            </span>
-          </h1>
-        </div>
-      );
-    } else if (profile === "company") {
-      return (
+      )
+      } return (
         <div className="profile">
           <div className="company">
             <h1 className="profile-info">Profile Information</h1>
+            <div className="company-avatar">
+            <img
+              src={require("../../../images/admin-avatar.png")}
+              style={{ borderRadius: "50%" }}
+              width="200px"
+              height="200px"
+              alt="404 not found!"
+            />
+          </div>
+            <h1
+              style={{ color: "black", fontWeight: "bold" }}
+              className="title"
+            >
+              {this.state.adminName}
+            </h1>
+            <h1>
+              EMAIL: <span> {this.state.email}</span>
+            </h1>
+            
+            
+          </div>
+        </div>
+      );
+    } else if (profile === "company") {
+      if(this.state.isloading){
+        return (
+          <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+          </div>
+      )
+      } return (
+        <div className="profile">
+          <div className="company">
+            <h1 className="profile-info">Profile Information</h1>
+            <div className="company-avatar">
+            <img
+              src={require("../../../images/company-avatar.png")}
+              style={{ borderRadius: "50%" }}
+              width="200px"
+              height="200px"
+              alt="404 not found!"
+            />
+          </div>
             <h1
               style={{ color: "black", fontWeight: "bold" }}
               className="title"
@@ -111,8 +166,57 @@ class Profile extends React.Component {
         </div>
       );
     } else if (profile === "student") {
-      return <div>Hello Student</div>;
-    } else return <Redirect to="/" />;
+      if(this.state.isloading){
+        return (
+          <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+          </div>
+      )
+      } return (
+        <div className="profile">
+          <div className="company">
+            <h1 className="profile-info">Profile Information</h1>
+            <div className="company-avatar">
+           {this.state.gender ==='male' ?
+            <img
+              src={require("../../../images/male-avatar.jpg")}
+              style={{ borderRadius: "50%" }}
+              width="200px"
+              height="200px"
+              alt="404 not found!"
+            />
+            : 
+            <img
+            src={require("../../../images/female-avatar.jpg")}
+            style={{ borderRadius: "50%" }}
+            width="200px"
+            height="200px"
+            alt="404 not found!"
+          />
+           }
+          </div>
+            <h1
+              style={{ color: "black", fontWeight: "bold" }}
+              className="title"
+            >
+              {this.state.studentName} {this.state.fatherName}
+            </h1>
+            <h1>
+              EMAIL: <span> {this.state.email}</span>
+            </h1>
+            <h1>
+              College Name: 
+              <span> {this.state.collegeName}</span>
+            </h1>
+            <h1>
+              Major: <span> {this.state.majors}</span>
+            </h1>
+            
+          </div>
+        </div>
+      );
+    } else return <Redirect to="/dashboard" />;
   }
 }
 

@@ -1,4 +1,6 @@
 import Axios from 'axios';
+import { actiontTypes } from './actionsTypes';
+
 
 export const createJob = (job) => {
     return async (dispatch, getState) => {
@@ -11,12 +13,12 @@ export const createJob = (job) => {
             })
 
             dispatch({
-                type: 'JOB-SUCCESS',
+                type: actiontTypes.jobSuccess,
                 payload: response
             })
         } catch (error) {
             dispatch({
-                type: 'JOB-FAILED',
+                type: actiontTypes.jobFailed,
                 payload: error
             })
         }
@@ -35,14 +37,23 @@ export const applyForJob = (job) => {
             })
 
             dispatch({
-                type: 'JOB-APPLY-SUCCESS',
+                type: actiontTypes.jobApplySuccess,
                 payload: response
             })
         } catch (error) {
             dispatch({
-                type: 'JOB-APPLY-FAILED',
+                type: actiontTypes.jobApplyFailed,
                 payload: error
             })
         }
+    }
+}
+
+export const jobToEdit = (id) => {
+    return async (dispatch, getState) => {
+            dispatch({
+                type: 'JOB-TO-EDIT',
+                payload: id
+            })
     }
 }

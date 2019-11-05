@@ -5,9 +5,9 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
-  Button
+  DropdownItem
 } from "reactstrap";
+import { Button } from "antd";
 import "./../styles/navbar.css";
 import Axios from "axios";
 import { Redirect, Link } from "react-router-dom";
@@ -89,10 +89,10 @@ class StudentLoggedInLinks extends React.Component {
                 <Link className="link " to="/companies">
                   Companies
                 </Link>
-                <Link className="link " to="jobs">
+                <Link className="link " to="/jobs">
                   Jobs
                 </Link>
-                <Link className="link " to="contact">
+                <Link className="link " to="/applied-jobs">
                  Applied Jobs
                 </Link>
                 <UncontrolledDropdown className="profile-link link">
@@ -104,7 +104,7 @@ class StudentLoggedInLinks extends React.Component {
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem>
-                      <Link to="/student-profile">Student Profile</Link>
+                      <Link to="/profile">Student Profile</Link>
                     </DropdownItem>
                     <DropdownItem divider />
                     <DropdownItem>
@@ -114,7 +114,14 @@ class StudentLoggedInLinks extends React.Component {
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
-                
+                <Link className="profile-s-link" to="/profile">
+                  Student Profile
+                </Link>
+                <Link className="navlink-s-button">
+                  <Button className="logout-s-screen" onClick={this.signout}>
+                    Logout
+                  </Button>
+                </Link>
               </ul>
             </div>
           </div>

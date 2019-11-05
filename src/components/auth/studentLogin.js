@@ -39,13 +39,18 @@ class NormalLoginForm extends React.Component {
           );
          
            // login company in 
-           window.location.reload();
+          window.location.reload();
         }
 
         // displaying backend error to user
         if (this.props.state.auth.authError === "Student Login Failed") {
-          this.setState({
-            error: this.props.state.auth.error.response.data.message
+          if(this.props.state.auth.error.response){
+            this.setState({
+              error: this.props.state.auth.error.response.data.message
+            });
+          }
+          else this.setState({
+            error: 'Please check your Internet Connection'
           })
         }
       }

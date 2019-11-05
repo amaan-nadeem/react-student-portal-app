@@ -1,4 +1,5 @@
-import Axios from "axios"
+import Axios from "axios";
+import { actiontTypes } from "./actionsTypes";
 
 
 const adminLogin = (admin) => {
@@ -13,13 +14,13 @@ const adminLogin = (admin) => {
               }
             );
             dispatch({
-                type: 'ADMIN_LOGIN_SUCCESS',
+                type: actiontTypes.adminSuccess,
                 payload: response,
                 token: response.data.token
             })
           } catch (error) {
             dispatch({
-                type: 'ADMIN_LOGIN_ERROR',
+                type: actiontTypes.adminFailed,
                 payload: error
             })
           }
@@ -38,13 +39,13 @@ const studentLogin = (student) => {
               }
             );
             dispatch({
-                type: 'STUDENT_LOGIN_SUCCESS',
+                type: actiontTypes.studentLoginSuccess,
                 payload: response,
                 token: response.data.token
             })
           } catch (error) {
             dispatch({
-                type: 'STUDENT_LOGIN_ERROR',
+                type: actiontTypes.studentLoginFailed,
                 payload: error
             })
           }
@@ -63,13 +64,13 @@ const companyLogin = (company) => {
               }
             );
             dispatch({
-                type: 'COMPANY_LOGIN_SUCCESS',
+                type: actiontTypes.companyLoginSuccess,
                 payload: response,
                 token: response.data.token
             })
           } catch (error) {
             dispatch({
-                type: 'COMPANY_LOGIN_ERROR',
+                type: actiontTypes.companyLoginFailed,
                 payload: error
             })
           }
@@ -92,13 +93,13 @@ const companySignup = (company) => {
               }
             );
             dispatch({
-                type: 'COMPANY_SIGNUP_SUCCESS',
+                type: actiontTypes.companySignupSuccess,
                 payload: response,
                 token: response.data.token
             })
           } catch (error) {
             dispatch({
-                type: 'COMPANY_SIGNUP_ERROR',
+                type: actiontTypes.companySignupFailed,
                 payload: error
             })
           }
@@ -122,13 +123,13 @@ const studentSignup = (student) => {
               }
             );
             dispatch({
-                type: 'STUDENT_SIGNUP_SUCCESS',
+                type: actiontTypes.studentSignupSuccess,
                 payload: response,
                 token: response.data.token
             })
           } catch (error) {
             dispatch({
-                type: 'STUDENT_SIGNUP_ERROR',
+                type: actiontTypes.studentSignupFailed,
                 payload: error
             })
           }

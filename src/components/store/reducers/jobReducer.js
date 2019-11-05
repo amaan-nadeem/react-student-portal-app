@@ -1,3 +1,5 @@
+
+
 const initState = {
     authError: null
 }
@@ -25,6 +27,11 @@ export const jobReducer = (state = initState, action) => {
            return  {
                authError: 'Job Application Failure',
                 error: action.payload
+            }
+        case "JOB-TO-EDIT":
+            return {
+                authError: 'JOB-EDIT',
+                data: action.payload
             }
         default: 
         return state

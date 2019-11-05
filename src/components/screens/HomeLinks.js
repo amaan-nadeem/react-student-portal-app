@@ -9,6 +9,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./styles/navbar.css";
+import Fade from 'react-reveal/Fade';
 
 
 class HomeLinks extends React.Component {
@@ -23,6 +24,7 @@ class HomeLinks extends React.Component {
   render() {
     return (
       <div className="navbar">
+          <Fade>
         <div className="logo">
           <NavbarBrand>
             <img
@@ -43,9 +45,6 @@ class HomeLinks extends React.Component {
             </Link>
             <Link className="link " to="about">
               About
-            </Link>
-            <Link className="link " to="contact">
-              Contact
             </Link>
             <UncontrolledDropdown className="signup-link link">
               <DropdownToggle
@@ -87,7 +86,9 @@ class HomeLinks extends React.Component {
             </UncontrolledDropdown>
           </ul>
         </div>
+      </Fade>
       </div>
+      
     );
   }
 }

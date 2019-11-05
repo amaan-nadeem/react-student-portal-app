@@ -9,8 +9,9 @@ class Navbar extends React.Component {
   state = {
     name: ""
   };
-  
+
   componentWillMount() {
+    
     if (localStorage.getItem("COMPANY_TOKEN")) {
       this.setState({
         name: "company"
@@ -30,11 +31,10 @@ class Navbar extends React.Component {
     }
   }
 
-  render(){
-
+  render() {
     if (this.state.name === "company") {
       return <CompanyLoggedInLinks />;
-    } else if (this.state.name==='admin') {
+    } else if (this.state.name === "admin") {
       return <AdminLoggedInLinks />;
     } else if (this.state.name === "student") {
       return <StudentLoggedInLinks />;
@@ -44,9 +44,6 @@ class Navbar extends React.Component {
 }
 
 const mapStateToProps = state => {
-  if (state.auth.authError === "Admin Login Successfull") {
-    const adminId = state.auth.data.data.adminData;
-    return adminId;
-  } else return state;
+  return state;
 };
 export default connect(mapStateToProps)(Navbar);
