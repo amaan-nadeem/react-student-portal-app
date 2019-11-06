@@ -83,7 +83,7 @@ class CreatedJobs extends React.Component {
                       {moment(job.createdAt).format("LLL")}
                     </p>
                     <Button
-                      style={{ width: "100%", backgroundColor: "lightBlue" }}
+                      style={{ width: "100%", backgroundColor: "teal", color: 'white' }}
                       onClick={() => this.edit(job._id)}
                     >
                       EDIT
