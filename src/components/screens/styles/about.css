@@ -1,6 +1,6 @@
 .about{
     height: 80vh;
-    padding-top: 10vh;
+    padding-top: 15vh;
     padding-left: 20px;
 }
 
@@ -13,6 +13,7 @@
 
 @media(max-width: 900px){
     .about{
+        padding-top: 8vh;
         height: 100vh;
     }
 }
