@@ -3,7 +3,7 @@ import { Button } from "reactstrap";
 import "./companies.css";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
-
+import { connect } from "react-redux";
 class Companies extends React.Component {
   constructor(props) {
     super(props);
@@ -37,9 +37,8 @@ class Companies extends React.Component {
         name: "admin",
         companies: response.data.companies
       });
-      
     } else if (localStorage.getItem("STUDENT_TOKEN")) {
-        // loading screen
+      // loading screen
       this.setState({
         isLoading: true,
         name: "student"
@@ -71,26 +70,32 @@ class Companies extends React.Component {
   }
 
   Delete = async (i, index) => {
-     if(localStorage.getItem('ADMIN_TOKEN')){
-        // getting response back
+    if (localStorage.getItem("ADMIN_TOKEN")) {
+      // getting response back
       const token = localStorage.getItem("ADMIN_TOKEN");
-          await Axios.delete(`https://jobzillaa.herokuapp.com/api/v1/admin/delete-company/${i}`,{
-                headers: {'x-auth-header': token}
-            });
+      await Axios.delete(
+        `https://jobzillaa.herokuapp.com/api/v1/admin/delete-company/${i}`,
+        {
+          headers: { "x-auth-header": token }
         }
+      );
+    }
 
     const companyToDelete = this.state.companies[index];
     const companies = this.state.companies.filter(company => {
-        return company !== companyToDelete
-    })
+      return company !== companyToDelete;
+    });
 
     this.setState({
       companies
-    })
-  }
+    });
+  };
 
   render() {
-     
+    if (this.props.auth.authError === "logged-out") {
+      return <Redirect to="/" />;
+    }
+
     if (this.state.name === "admin" || this.state.name === "student") {
       if (this.state.isLoading) {
         return (
@@ -128,8 +133,14 @@ class Companies extends React.Component {
                       <span>City: </span>
                       {company.city}
                     </p>
-                    
-                   {this.state.name ==="admin" ? <Button onClick={() => this.Delete(company._id, index)}>Delete</Button>: <></>}
+
+                    {this.state.name === "admin" ? (
+                      <Button onClick={() => this.Delete(company._id, index)}>
+                        Delete
+                      </Button>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 );
               })}
@@ -141,4 +152,7 @@ class Companies extends React.Component {
   }
 }
 
-export default Companies;
+const mapStateToProps = state => {
+  return state;
+};
+export default connect(mapStateToProps)(Companies);

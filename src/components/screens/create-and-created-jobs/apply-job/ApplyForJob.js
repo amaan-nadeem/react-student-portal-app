@@ -30,8 +30,6 @@ class ApplyForJobs extends React.Component {
       });
     }
 
-    console.log(this.state.experienceInSpecifiedField);
-    console.log(localStorage.getItem("JOB-ID"))
     const job = {
       totalExperience: this.state.totalExperience,
       experienceInSpecifiedField: this.state.experienceInSpecifiedField,
@@ -41,7 +39,7 @@ class ApplyForJobs extends React.Component {
 
     await this.props.job(job)
 
-    console.log(this.props);
+    
     if(this.props.state.job.authError === "Job Application Successful"){
       this.setState({
         error: "Job posted Successfully!"
@@ -71,6 +69,9 @@ class ApplyForJobs extends React.Component {
   }
   
   render() {
+    if(this.props.state.auth.authError === "logged-out"){
+      return <Redirect to = "/" />
+    }
     if (this.state.name === 'student') {
       return (
         <div className="job-div">

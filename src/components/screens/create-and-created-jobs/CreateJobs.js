@@ -138,6 +138,9 @@ class CreateJob extends React.Component {
   }
 
   render() {
+    if(this.props.state.auth.authError === "logged-out"){
+      return <Redirect to = "/" />
+    }
     if (this.state.name === "company") {
       return (
         <div className="job-div">

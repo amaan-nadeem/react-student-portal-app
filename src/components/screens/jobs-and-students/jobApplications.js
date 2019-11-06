@@ -3,20 +3,19 @@ import { Button } from "reactstrap";
 import "../companies/companies.css";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
-
+import { connect } from "react-redux";
 class JobApplications extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      jobApplications:[],
-      error: ''
+      jobApplications: [],
+      error: ""
     };
   }
 
   async componentWillMount() {
     if (localStorage.getItem("COMPANY_TOKEN")) {
-       
-        // loading screen
+      // loading screen
       this.setState({
         isLoading: true,
         name: "company"
@@ -30,18 +29,17 @@ class JobApplications extends React.Component {
         }
       );
 
-        
-       // checking jobs
-       if(response.data.jobApplications.length === 0){
-         this.setState({
-            error: 'No Student Yet Applied to any of your Created job'
-        })
-    } else {
+      // checking jobs
+      if (response.data.jobApplications.length === 0) {
         this.setState({
-            error: ''
-        })
-    }
-      
+          error: "No Student Yet Applied to any of your Created job"
+        });
+      } else {
+        this.setState({
+          error: ""
+        });
+      }
+
       this.setState({
         isLoading: false,
         name: "company",
@@ -60,34 +58,34 @@ class JobApplications extends React.Component {
       this.setState({
         name: "home"
       });
-    
+    }
   }
-}
 
-//   Delete = async (i, index) => {
-   
-//      if(localStorage.getItem('ADMIN_TOKEN')){
-//         // getting response back
-//       const token = localStorage.getItem("ADMIN_TOKEN");
-//           await Axios.delete(`https://jobzillaa.herokuapp.com/api/v1/admin/delete-student/${i}`,{
-//                 headers: {'x-auth-header': token}
-//             });
-//         }
+  //   Delete = async (i, index) => {
 
-//     const studentToDelete = this.state.students[index];
-//     const students = this.state.students.filter((student) => {
-//         return student !== studentToDelete
-//     })
+  //      if(localStorage.getItem('ADMIN_TOKEN')){
+  //         // getting response back
+  //       const token = localStorage.getItem("ADMIN_TOKEN");
+  //           await Axios.delete(`https://jobzillaa.herokuapp.com/api/v1/admin/delete-student/${i}`,{
+  //                 headers: {'x-auth-header': token}
+  //             });
+  //         }
 
-//     this.setState({
-//       students
-//     })
-//   }
+  //     const studentToDelete = this.state.students[index];
+  //     const students = this.state.students.filter((student) => {
+  //         return student !== studentToDelete
+  //     })
 
-
+  //     this.setState({
+  //       students
+  //     })
+  //   }
 
   render() {
-   
+    
+    if(this.props.auth.authError === "logged-out"){
+      return <Redirect to = "/" />
+    }
     if (this.state.name === "company") {
       if (this.state.isLoading) {
         return (
@@ -100,8 +98,8 @@ class JobApplications extends React.Component {
         return (
           <div className="companies-main">
             <h2>JOB APPLICATIONS</h2>
-            {!this.state.error ? 
-                <div className="each-companies">
+            {!this.state.error ? (
+              <div className="each-companies">
                 {this.state.jobApplications.map((student, index) => {
                   return (
                     <div className={`company-${index} sub-companies`}>
@@ -115,7 +113,10 @@ class JobApplications extends React.Component {
                         {student.jobId.requiredExperience}
                       </p>
                       <p>
-                        <span>Total Job Experience of {student.createdBy.studentName}: </span>
+                        <span>
+                          Total Job Experience of{" "}
+                          {student.createdBy.studentName}:{" "}
+                        </span>
                         {student.totalExperience}
                       </p>
                       <p>
@@ -126,22 +127,38 @@ class JobApplications extends React.Component {
                         <span>Studying in: </span>
                         {student.createdBy.collegeName}
                       </p>
-                      <p><span>Majors: </span>
-                          {student.createdBy.majors.map((major, index) => {
-                              return <em>{major}</em> 
-                          })}
+                      <p>
+                        <span>Majors: </span>
+                        {student.createdBy.majors.map((major, index) => {
+                          return <em>{major}</em>;
+                        })}
                       </p>
-                   <Button onClick={() => this.Delete(student._id, index)}>Accept</Button>
+                      <Button onClick={() => this.Delete(student._id, index)}>
+                        Accept
+                      </Button>
                     </div>
-                  )
+                  );
                 })}
-              </div> : <p style={{textAlign:'center', fontWeight:'bold', padding:'5px'}}>{this.state.error}</p>}
-            
-                
-                </div>
-                )
-            }
-    } else return <Redirect to="/dashboard" />
+              </div>
+            ) : (
+              <p
+                style={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  padding: "5px"
+                }}
+              >
+                {this.state.error}
+              </p>
+            )}
+          </div>
+        );
+      }
+    } else return <Redirect to="/dashboard" />;
+  }
 }
-}
-export default JobApplications;
+
+const mapStateToProps = state => {
+  return state;
+};
+export default connect(mapStateToProps)(JobApplications);

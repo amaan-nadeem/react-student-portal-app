@@ -1,7 +1,7 @@
 import React from "react";
-import jwt_decode from "jwt-decode";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
+import {connect} from 'react-redux';
 import "./profile.css";
 
 class Profile extends React.Component {
@@ -82,7 +82,9 @@ class Profile extends React.Component {
     }
   }
   render() {
-    
+    if(this.props.auth.authError === "logged-out"){
+      return <Redirect to = "/" />
+    }
     const profile = this.state.name;
     if (profile === "admin") {
       if(this.state.isloading){
@@ -220,4 +222,7 @@ class Profile extends React.Component {
   }
 }
 
-export default Profile;
+const mapStateToProps = (state) => {
+  return state
+}
+export default connect(mapStateToProps)(Profile);

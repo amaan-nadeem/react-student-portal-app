@@ -5,6 +5,7 @@ import Axios from "axios";
 import { Redirect } from "react-router-dom";
 import "./jobs.css";
 import moment from "moment";
+import {connect} from 'react-redux';
 
 class Jobs extends React.Component {
   constructor(props) {
@@ -100,6 +101,10 @@ class Jobs extends React.Component {
   };
 
   render() {
+    if(this.props.auth.authError === "logged-out"){
+      return <Redirect to = "/" />
+    }
+    
     if (this.state.name === "admin" || this.state.name === "student") {
       if (this.state.isLoading) {
         return (
@@ -164,4 +169,8 @@ class Jobs extends React.Component {
     } else return <Redirect to="/" />;
   }
 }
-export default Jobs;
+
+const mapStateToProps = (state) => {
+  return state
+}
+export default connect(mapStateToProps)(Jobs);

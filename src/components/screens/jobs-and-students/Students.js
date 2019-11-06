@@ -3,7 +3,7 @@ import { Button } from "reactstrap";
 import "../companies/companies.css";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
-
+import { connect } from "react-redux";
 class Students extends React.Component {
   constructor(props) {
     super(props);
@@ -14,9 +14,9 @@ class Students extends React.Component {
 
   async componentWillMount() {
     if (localStorage.getItem("COMPANY_TOKEN")) {
-     this.setState({
-       name: 'company'
-     })
+      this.setState({
+        name: "company"
+      });
     } else if (localStorage.getItem("ADMIN_TOKEN")) {
       // loading screen
       this.setState({
@@ -37,7 +37,6 @@ class Students extends React.Component {
         name: "admin",
         students: response.data.students
       });
-      
     } else if (localStorage.getItem("STUDENT_TOKEN")) {
       this.setState({
         name: "student"
@@ -46,32 +45,35 @@ class Students extends React.Component {
       this.setState({
         name: "home"
       });
-    
+    }
   }
-}
 
   Delete = async (i, index) => {
-   
-     if(localStorage.getItem('ADMIN_TOKEN')){
-        // getting response back
+    if (localStorage.getItem("ADMIN_TOKEN")) {
+      // getting response back
       const token = localStorage.getItem("ADMIN_TOKEN");
-          await Axios.delete(`https://jobzillaa.herokuapp.com/api/v1/admin/delete-student/${i}`,{
-                headers: {'x-auth-header': token}
-            });
+      await Axios.delete(
+        `https://jobzillaa.herokuapp.com/api/v1/admin/delete-student/${i}`,
+        {
+          headers: { "x-auth-header": token }
         }
+      );
+    }
 
     const studentToDelete = this.state.students[index];
-    const students = this.state.students.filter((student) => {
-        return student !== studentToDelete
-    })
+    const students = this.state.students.filter(student => {
+      return student !== studentToDelete;
+    });
 
     this.setState({
       students
-    })
-  }
+    });
+  };
 
   render() {
-   
+    if (this.props.auth.authError === "logged-out") {
+      return <Redirect to="/" />;
+    }
     if (this.state.name === "admin") {
       if (this.state.isLoading) {
         return (
@@ -101,12 +103,15 @@ class Students extends React.Component {
                       <span>College Name: </span>
                       {student.collegeName}
                     </p>
-                    <p><span>Majors: </span>
-                        {student.majors.map((major, index) => {
-                            return <em>{major}</em> 
-                        })}
+                    <p>
+                      <span>Majors: </span>
+                      {student.majors.map((major, index) => {
+                        return <em>{major}</em>;
+                      })}
                     </p>
-                 <Button onClick={() => this.Delete(student._id, index)}>Delete</Button>
+                    <Button onClick={() => this.Delete(student._id, index)}>
+                      Delete
+                    </Button>
                   </div>
                 );
               })}
@@ -114,7 +119,11 @@ class Students extends React.Component {
           </div>
         );
       }
-    } else return <Redirect to="/" />
+    } else return <Redirect to="/" />;
+  }
 }
-}
-export default Students;
+
+const mapStateToProps = state => {
+  return state;
+};
+export default connect(mapStateToProps)(Students);

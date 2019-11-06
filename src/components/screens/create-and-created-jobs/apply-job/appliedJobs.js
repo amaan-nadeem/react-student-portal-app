@@ -1,10 +1,8 @@
 import React from "react";
-import { Button } from "reactstrap";
 import "../../companies/companies.css";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
-import Jobs from "../../jobs-and-students/jobs";
-
+import { connect } from "react-redux";
 class AppliedJobs extends React.Component {
   constructor(props) {
     super(props);
@@ -39,7 +37,6 @@ class AppliedJobs extends React.Component {
         }
       );
 
-      console.log(response.data.appliedJobs.length);
       // checking jobs
       if (response.data.appliedJobs.length === 0) {
         this.setState({
@@ -84,6 +81,9 @@ class AppliedJobs extends React.Component {
   //   }
 
   render() {
+    if (this.props.auth.authError === "logged-out") {
+      return <Redirect to="/" />;
+    }
     if (this.state.name === "student") {
       if (this.state.isLoading) {
         return (
@@ -115,7 +115,9 @@ class AppliedJobs extends React.Component {
                         {job.totalExperience}
                       </p>
                       <p>
-                        <span>Your experience as a {job.jobId.requiredPosition}: </span>
+                        <span>
+                          Your experience as a {job.jobId.requiredPosition}:{" "}
+                        </span>
                         {job.experienceInSpecifiedField}
                       </p>
                     </div>
@@ -139,4 +141,8 @@ class AppliedJobs extends React.Component {
     } else return <Redirect to="/dashboard" />;
   }
 }
-export default AppliedJobs;
+
+const mapStateToProps = state => {
+  return state;
+};
+export default connect(mapStateToProps)(AppliedJobs);

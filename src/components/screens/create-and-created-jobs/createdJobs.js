@@ -52,6 +52,9 @@ class CreatedJobs extends React.Component {
   }
 
   render() {
+    if(this.props.auth.authError === "logged-out"){
+      return <Redirect to = "/" />
+    }
     if (this.state.name === "company") {
       if (this.state.isLoading) {
         return (
@@ -112,4 +115,8 @@ const mapDispatchToProps = dispatch => {
     id: id => dispatch(jobToEdit(id))
   };
 };
-export default connect(null, mapDispatchToProps)(CreatedJobs);
+
+const mapStateToProps = (state) => {
+  return state
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CreatedJobs);
