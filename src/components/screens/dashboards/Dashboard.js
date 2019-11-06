@@ -4,6 +4,7 @@ import "./dashboardStyle.css";
 import { Redirect, Link } from "react-router-dom";
 import Axios from "axios";
 import { Button } from "reactstrap";
+import { connect } from 'react-redux';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -74,7 +75,10 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    console.log(this.state.name);
+    console.log(this.props);
+    if(this.props.auth.authError === "logged-out"){
+      return <Redirect to = "/" />
+    }
     if (this.state.name === "student") {
       if (this.state.isLoading) {
         return (
@@ -154,4 +158,7 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return state
+}
+export default connect(mapStateToProps)(Dashboard);

@@ -37,7 +37,6 @@ class NormalLoginForm extends React.Component {
           const decoded = jwt_decode(
             this.props.state.auth.data.data.token
           );
-         
            // login company in 
            this.props.history.push('/dashboard');
         }

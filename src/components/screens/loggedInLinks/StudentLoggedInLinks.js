@@ -27,7 +27,7 @@ class StudentLoggedInLinks extends React.Component {
 
   signout = () => {
     localStorage.removeItem('STUDENT_TOKEN');
-    window.location.reload();
+    this.props.student("logout"); 
   };
 
   async componentWillMount() {
@@ -199,12 +199,13 @@ class StudentLoggedInLinks extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return state
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     student: student => dispatch(studentLogin(student))
   }
-}
-const mapStateToProps = (state) => {
-  return state
 }
 export default connect(mapStateToProps, mapDispatchToProps)(StudentLoggedInLinks);

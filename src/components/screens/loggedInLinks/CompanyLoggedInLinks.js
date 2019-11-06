@@ -13,6 +13,7 @@ import Axios from "axios";
 import { Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import jwt_decode from 'jwt-decode';
+import { companyLogin } from "../../store/actions/authActions";
 
 
 class CompanyLoggedInLinks extends React.Component {
@@ -26,7 +27,7 @@ class CompanyLoggedInLinks extends React.Component {
 
   signout = () => {
     localStorage.removeItem("COMPANY_TOKEN");
-    window.location.reload();
+    this.props.company('logout');
   };
 
   async componentWillMount() {
@@ -203,5 +204,10 @@ class CompanyLoggedInLinks extends React.Component {
 const mapStateToProps = state => {
   return state;
 };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    company: company => dispatch(companyLogin(company))
+  }
+}
 
-export default connect(mapStateToProps)(CompanyLoggedInLinks);
+export default connect(mapStateToProps, mapDispatchToProps)(CompanyLoggedInLinks);

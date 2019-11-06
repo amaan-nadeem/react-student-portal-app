@@ -3,6 +3,7 @@ export const actiontTypes = {
     adminFailed: 'ADMIN_LOGIN_ERROR',
     studentLoginSuccess: 'STUDENT_LOGIN_SUCCESS',
     studentLoginFailed: 'STUDENT_LOGIN_ERROR',
+    Logout: 'LOGOUT_SUCCESS',
     studentSignupSuccess: 'STUDENT_SIGNUP_SUCCESS',
     studentSignupFailed: 'STUDENT_SIGNUP_ERROR',
     companyLoginSuccess: 'COMPANY_LOGIN_SUCCESS',
@@ -12,6 +13,6 @@ export const actiontTypes = {
     jobSuccess: 'JOB-SUCCESS',
     jobFailed: 'JOB-FAILED',
     jobApplySuccess: 'JOB-APPLY-SUCCESS',
-    jobApplyFailed: 'JOB-APPLY-FAILED'
+    jobApplyFailed: 'JOB-APPLY-FAILED',
 }
 

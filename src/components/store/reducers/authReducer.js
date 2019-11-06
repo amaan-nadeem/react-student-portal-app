@@ -70,6 +70,12 @@ export const authReducer = (state = initState, action) => {
         authError: "Student Signup Failed",
         error: action.payload
       };
+    case "LOGOUT_SUCCESS":
+      return{
+        state,
+        authError: "logged-out",
+        error: action.payload
+      }  
     default:
       return state;
   }

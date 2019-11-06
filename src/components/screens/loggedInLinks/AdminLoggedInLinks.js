@@ -13,6 +13,8 @@ import Axios from "axios";
 import { Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import jwt_decode from "jwt-decode";
+import { adminLogin } from "../../store/actions/authActions";
+
 
 class AdminLoggedInLinks extends React.Component {
   onClick = () => {
@@ -25,7 +27,7 @@ class AdminLoggedInLinks extends React.Component {
 
   signout = () => {
     localStorage.removeItem("ADMIN_TOKEN");
-    window.location.reload();
+    this.props.admin('logout');
   };
 
   async componentWillMount() {
@@ -53,7 +55,7 @@ class AdminLoggedInLinks extends React.Component {
         name: "admin",
         adminName: response.data.adminProfile.adminName[0]
       });
-      console.log(response);
+     
     } else if (localStorage.getItem("STUDENT_TOKEN")) {
       this.setState({
         name: "student"
@@ -200,7 +202,12 @@ class AdminLoggedInLinks extends React.Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    admin: admin => dispatch(adminLogin(admin))
+  }
+};
 const mapStateToProps = state => {
   return state;
 };
-export default connect(mapStateToProps)(AdminLoggedInLinks);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminLoggedInLinks);
