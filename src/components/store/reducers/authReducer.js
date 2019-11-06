@@ -1,3 +1,5 @@
+import { actiontTypes } from "../actions/actionsTypes";
+
 const initState = {
     authError: null
 }
@@ -5,72 +7,72 @@ const initState = {
 
 export const authReducer = (state = initState, action) => {
   switch (action.type) {
-    case "ADMIN_LOGIN_SUCCESS":
+    case actiontTypes.adminSuccess:
       return {
         ...state,
         authError: "Admin Login Successfull",
         data: action.payload,
         token: action.token
       };
-    case "ADMIN_LOGIN_ERROR":
+    case actiontTypes.adminFailed:
       return {
         state,
         authError: "Admin Login Failed",
         error: action.payload
       };
-    case "STUDENT_LOGIN_SUCCESS":
+    case actiontTypes.studentLoginSuccess:
       return {
         ...state,
         authError: "Student Login Successfull",
         data: action.payload,
         token: action.token
       };
-    case "STUDENT_LOGIN_ERROR":
+    case actiontTypes.studentLoginFailed:
       return {
         state,
         authError: "Student Login Failed",
         error: action.payload
       };
-    case "COMPANY_LOGIN_SUCCESS":
+    case actiontTypes.companyLoginSuccess:
       return {
         ...state,
         authError: "Company Login Successfull",
         data: action.payload,
         token: action.token
       };
-    case "COMPANY_LOGIN_ERROR":
+    case actiontTypes.companyLoginFailed:
       return {
         state,
         authError: "Company Login Failed",
         error: action.payload
       };
-    case "COMPANY_SIGNUP_SUCCESS":
+    case actiontTypes.companySignupSuccess:
       return {
         ...state,
         authError: "Company Signup Successfull",
         data: action.payload,
         token: action.token
       };
-    case "COMPANY_SIGNUP_ERROR":
+    case actiontTypes.companySignupFailed:
       return {
         state,
         authError: "Company Signup Failed",
         error: action.payload
       };
-    case "STUDENT_SIGNUP_SUCCESS":
+    case actiontTypes.studentSignupSuccess:
       return {
         ...state,
         authError: "Student Signup Successfull",
         data: action.payload,
         token: action.token
       };
-    case "STUDENT_SIGNUP_ERROR":
+    case actiontTypes.studentSignupFailed:
       return {
         state,
         authError: "Student Signup Failed",
         error: action.payload
       };
-    case "LOGOUT_SUCCESS":
+    case actiontTypes.Logout:
       return{
         state,
         authError: "logged-out",

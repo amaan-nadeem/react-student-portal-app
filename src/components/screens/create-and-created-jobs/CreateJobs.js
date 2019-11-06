@@ -49,13 +49,14 @@ class CreateJob extends React.Component {
 
   edit = async e => {
     e.preventDefault();
+    const id = this.props.state.job.data;
     const token = localStorage.getItem("COMPANY_TOKEN");
     if (
       !this.state.requiredPosition &&
       this.state.requiredExperience.length >= 1
     ) {
       await Axios.put(
-        `https://jobzillaa.herokuapp.com/api/v1/jobs/edit-job/5db984e22578d3001745a941`,
+        `https://jobzillaa.herokuapp.com/api/v1/jobs/edit-job/${id}`,
         {
           requiredExperience: this.state.requiredExperience
         },
@@ -76,7 +77,7 @@ class CreateJob extends React.Component {
       this.state.requiredPosition.length >= 1
     ) {
       await Axios.put(
-        `https://jobzillaa.herokuapp.com/api/v1/jobs/edit-job/5db984e22578d3001745a941`,
+        `https://jobzillaa.herokuapp.com/api/v1/jobs/edit-job/${id}`,
         {
           requiredPosition: this.state.requiredPosition
         },
@@ -94,7 +95,7 @@ class CreateJob extends React.Component {
       }, 500);
     } else if (this.state.requiredExperience && this.state.requiredPosition) {
       await Axios.put(
-        `https://jobzillaa.herokuapp.com/api/v1/jobs/edit-job/5db984e22578d3001745a941`,
+        `https://jobzillaa.herokuapp.com/api/v1/jobs/edit-job/${id}`,
         {
           requiredExperience: this.state.requiredExperience,
           requiredPosition: this.state.requiredPosition
@@ -119,6 +120,7 @@ class CreateJob extends React.Component {
   };
 
   componentWillMount() {
+    console.log(this.props);
     this.setState({
       jobToEdit: this.props.state.job.data
     });
