@@ -33,7 +33,9 @@ class Navbar extends React.Component {
   }
 
   render() {
-    
+    if(this.props.auth.authError === "logged-out"){
+      return <HomeLinks/>
+    }
     if(this.props.auth.token){
     const decode = jwt_decode(this.props.auth.token);
     if(decode.student){

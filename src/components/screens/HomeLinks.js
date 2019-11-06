@@ -18,7 +18,7 @@ class HomeLinks extends React.Component {
     if (navlink.className === "navlinks") {
       document.getElementById("navlinks").className = "dropDownNavlinks";
     } else document.getElementById("navlinks").className = "navlinks";
-    console.log(document.getElementById("navlinks").className);
+    
   };
 
   render() {

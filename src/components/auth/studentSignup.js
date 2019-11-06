@@ -63,8 +63,7 @@ class RegistrationForm extends React.Component {
 
     this.props.form.validateFieldsAndScroll(async (err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
-        console.log(values.gender[0])
+       
 
         // loging admin in
         const student = {

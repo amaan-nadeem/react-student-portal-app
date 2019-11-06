@@ -75,7 +75,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    console.log(this.props);
+    
     if(this.props.auth.authError === "logged-out"){
       return <Redirect to = "/" />
     }

@@ -37,7 +37,7 @@ class Companies extends React.Component {
         name: "admin",
         companies: response.data.companies
       });
-      console.log(response);
+      
     } else if (localStorage.getItem("STUDENT_TOKEN")) {
         // loading screen
       this.setState({
@@ -90,7 +90,7 @@ class Companies extends React.Component {
   }
 
   render() {
-      console.log(this.state.name);
+     
     if (this.state.name === "admin" || this.state.name === "student") {
       if (this.state.isLoading) {
         return (

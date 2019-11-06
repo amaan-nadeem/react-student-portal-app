@@ -82,7 +82,7 @@ class Profile extends React.Component {
     }
   }
   render() {
-    console.log(this.state);
+    
     const profile = this.state.name;
     if (profile === "admin") {
       if(this.state.isloading){

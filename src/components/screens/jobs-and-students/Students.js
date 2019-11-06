@@ -37,7 +37,7 @@ class Students extends React.Component {
         name: "admin",
         students: response.data.students
       });
-      console.log(response);
+      
     } else if (localStorage.getItem("STUDENT_TOKEN")) {
       this.setState({
         name: "student"

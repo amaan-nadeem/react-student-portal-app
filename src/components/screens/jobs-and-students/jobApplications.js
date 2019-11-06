@@ -30,7 +30,7 @@ class JobApplications extends React.Component {
         }
       );
 
-        console.log(response.data.jobApplications.length);
+        
        // checking jobs
        if(response.data.jobApplications.length === 0){
          this.setState({
@@ -41,7 +41,7 @@ class JobApplications extends React.Component {
             error: ''
         })
     }
-      console.log(this.state.error);
+      
       this.setState({
         isLoading: false,
         name: "company",

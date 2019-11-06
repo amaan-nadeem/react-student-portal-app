@@ -93,7 +93,8 @@ button{
     button{
         display: inline-block;
         border: none;
-        background-color: grey;
+        background-color: transparent;
+        color: rgb(216, 213, 213) !important;
         margin-right: 3vw !important;
         outline: none !important;
     }

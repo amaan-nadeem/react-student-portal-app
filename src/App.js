@@ -43,7 +43,7 @@ class App extends React.Component {
         name: "footer"
       });
     }
-    console.log(this.props);
+    
   }
   render() {
     
@@ -100,7 +100,7 @@ class App extends React.Component {
             <Route path="/job-applications" component={JobApplications} />
             <Route path="/applied-jobs" component={AppliedJobs} />
           </Switch>
-          {this.state.name !== "no-footer-needed" ? <Footer /> : <></>}
+          {this.state.name !== "no-footer-needed" || this.props.auth.authError === "logged-out" ? <Footer /> : <></>}
         </Router>
       </React.Fragment>
     );
