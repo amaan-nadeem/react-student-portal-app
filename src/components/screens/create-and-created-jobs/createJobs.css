@@ -81,7 +81,6 @@
 
   .jobs-company-div{
       padding-top: 100px;
-
   }
   .jobs-company-div h1{
       text-align: center;
@@ -107,8 +106,21 @@
 
 
 @media(max-width: 900px){
+  .jobs-company-div{
+    padding-top: 40px;
+}
+  .each-company-jobs-main-div{
+    grid-template-columns: auto auto;
+  }
     .job-form{
         width: 100vw;
         left: 0;
     }
+}
+
+@media(max-width: 600px) {
+  
+  .each-company-jobs-main-div{
+    grid-template-columns: auto;
+  }
 }
