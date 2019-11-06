@@ -1,11 +1,9 @@
 import React from "react";
-import { Form, Icon, Input, Button, Checkbox } from "antd";
+import { Form, Icon, Input, Button } from "antd";
 import "./styles.css/formStyles.css";
-import Footer from "../screens/Footer";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { adminLogin } from "../store/actions/authActions";
-import Axios from "axios";
 import jwt_decode from "jwt-decode";
 
 class NormalLoginForm extends React.Component {

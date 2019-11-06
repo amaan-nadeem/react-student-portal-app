@@ -4,13 +4,7 @@ import "./styles.css/formStyles.css";
 import {
   Form,
   Input,
-  Tooltip,
-  Icon,
   Cascader,
-  Select,
-  Row,
-  Col,
-  Checkbox,
   Button,
   AutoComplete
 } from "antd";
@@ -18,7 +12,6 @@ import { connect } from "react-redux";
 import jwt_decode from "jwt-decode";
 import { studentSignup } from "../store/actions/authActions";
 import { Redirect } from "react-router-dom";
-const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
 
 const majors = [

@@ -2,7 +2,7 @@ import React from "react";
 import "antd/dist/antd.css";
 import "./styles.css/formStyles.css";
 import { connect } from "react-redux";
-import { Form, Input, Select, Checkbox, Button, AutoComplete } from "antd";
+import { Form, Input, Select, Button, AutoComplete } from "antd";
 import { companySignup } from "../store/actions/authActions";
 import jwt_decode from "jwt-decode";
 import {Redirect} from 'react-router-dom';

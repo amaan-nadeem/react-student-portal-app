@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Icon, Input, Button, Checkbox } from "antd";
+import { Form, Icon, Input, Button } from "antd";
 import "./styles.css/formStyles.css";
 import jwt_decode from "jwt-decode";
 import { connect } from "react-redux";

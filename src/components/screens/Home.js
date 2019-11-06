@@ -75,7 +75,7 @@ class Home extends React.Component {
                     duration={5}
                     className="counter"
                   />
-                  <h3>Student Registered</h3>
+                  <h3 className="section-heading">Student Registered</h3>
                 </div>
                 <div className="column col-5">
                   <Button>
@@ -87,7 +87,7 @@ class Home extends React.Component {
                     duration={5}
                     className="counter"
                   />
-                  <h3>Companies registered</h3>
+                  <h3 className="section-heading">Companies registered</h3>
                 </div>
               </div>
             </div>

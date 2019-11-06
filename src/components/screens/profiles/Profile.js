@@ -1,7 +1,7 @@
 import React from "react";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 import "./profile.css";
 
 class Profile extends React.Component {
@@ -49,19 +49,19 @@ class Profile extends React.Component {
         }
       );
       this.setState({
-        isloading:false,
+        isloading: false,
         studentName: response.data.studentProfile.studentName,
-        fatherName:response.data.studentProfile.fatherName,
+        fatherName: response.data.studentProfile.fatherName,
         collegeName: response.data.studentProfile.collegeName,
         email: response.data.studentProfile.email,
-        majors:response.data.studentProfile.majors,
+        majors: response.data.studentProfile.majors,
         gender: response.data.studentProfile.gender
       });
     } else if (localStorage.getItem("ADMIN_TOKEN")) {
       this.setState({
         isloading: true,
         name: "admin"
-      })
+      });
       const token = localStorage.getItem("ADMIN_TOKEN");
       const response = await Axios.get(
         "https://jobzillaa.herokuapp.com/api/v1/admin/profile",
@@ -82,31 +82,32 @@ class Profile extends React.Component {
     }
   }
   render() {
-    if(this.props.auth.authError === "logged-out"){
-      return <Redirect to = "/" />
+    if (this.props.auth.authError === "logged-out") {
+      return <Redirect to="/" />;
     }
     const profile = this.state.name;
     if (profile === "admin") {
-      if(this.state.isloading){
+      if (this.state.isloading) {
         return (
           <div class="spinner">
             <div class="double-bounce1"></div>
             <div class="double-bounce2"></div>
           </div>
-      )
-      } return (
+        );
+      }
+      return (
         <div className="profile">
           <div className="company">
             <h1 className="profile-info">Profile Information</h1>
             <div className="company-avatar">
-            <img
-              src={require("../../../images/admin-avatar.png")}
-              style={{ borderRadius: "50%" }}
-              width="200px"
-              height="200px"
-              alt="404 not found!"
-            />
-          </div>
+              <img
+                src={require("../../../images/admin-avatar.png")}
+                style={{ borderRadius: "50%" }}
+                width="200px"
+                height="200px"
+                alt="404 not found!"
+              />
+            </div>
             <h1
               style={{ color: "black", fontWeight: "bold" }}
               className="title"
@@ -116,32 +117,31 @@ class Profile extends React.Component {
             <h1>
               EMAIL: <span> {this.state.email}</span>
             </h1>
-            
-            
           </div>
         </div>
       );
     } else if (profile === "company") {
-      if(this.state.isloading){
+      if (this.state.isloading) {
         return (
           <div class="spinner">
             <div class="double-bounce1"></div>
             <div class="double-bounce2"></div>
           </div>
-      )
-      } return (
+        );
+      }
+      return (
         <div className="profile">
           <div className="company">
             <h1 className="profile-info">Profile Information</h1>
             <div className="company-avatar">
-            <img
-              src={require("../../../images/company-avatar.png")}
-              style={{ borderRadius: "50%" }}
-              width="200px"
-              height="200px"
-              alt="404 not found!"
-            />
-          </div>
+              <img
+                src={require("../../../images/company-avatar.png")}
+                style={{ borderRadius: "50%" }}
+                width="200px"
+                height="200px"
+                alt="404 not found!"
+              />
+            </div>
             <h1
               style={{ color: "black", fontWeight: "bold" }}
               className="title"
@@ -168,36 +168,37 @@ class Profile extends React.Component {
         </div>
       );
     } else if (profile === "student") {
-      if(this.state.isloading){
+      if (this.state.isloading) {
         return (
           <div class="spinner">
             <div class="double-bounce1"></div>
             <div class="double-bounce2"></div>
           </div>
-      )
-      } return (
+        );
+      }
+      return (
         <div className="profile">
           <div className="company">
             <h1 className="profile-info">Profile Information</h1>
             <div className="company-avatar">
-           {this.state.gender ==='male' ?
-            <img
-              src={require("../../../images/male-avatar.jpg")}
-              style={{ borderRadius: "50%" }}
-              width="200px"
-              height="200px"
-              alt="404 not found!"
-            />
-            : 
-            <img
-            src={require("../../../images/female-avatar.jpg")}
-            style={{ borderRadius: "50%" }}
-            width="200px"
-            height="200px"
-            alt="404 not found!"
-          />
-           }
-          </div>
+              {this.state.gender === "male" ? (
+                <img
+                  src={require("../../../images/male-avatar.jpg")}
+                  style={{ borderRadius: "50%" }}
+                  width="200px"
+                  height="200px"
+                  alt="404 not found!"
+                />
+              ) : (
+                <img
+                  src={require("../../../images/female-avatar.jpg")}
+                  style={{ borderRadius: "50%" }}
+                  width="200px"
+                  height="200px"
+                  alt="404 not found!"
+                />
+              )}
+            </div>
             <h1
               style={{ color: "black", fontWeight: "bold" }}
               className="title"
@@ -208,13 +209,12 @@ class Profile extends React.Component {
               EMAIL: <span> {this.state.email}</span>
             </h1>
             <h1>
-              College Name: 
+              College Name:
               <span> {this.state.collegeName}</span>
             </h1>
             <h1>
               Major: <span> {this.state.majors}</span>
             </h1>
-            
           </div>
         </div>
       );
@@ -222,7 +222,7 @@ class Profile extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return state
-}
+const mapStateToProps = state => {
+  return state;
+};
 export default connect(mapStateToProps)(Profile);

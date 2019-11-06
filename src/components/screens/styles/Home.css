@@ -131,6 +131,18 @@ section .description {
     }
 }
 @media(max-width: 768px){
+    .row button{
+      margin-left: 35px;
+    }
+    .counter{
+      font-size: 30px !important;
+      margin-left: 25px;
+    }
+    .section-heading{
+      display: flex;
+      justify-content: center;
+      margin-left: 23px;
+    }
     .footer div{
         width: 100%;
         display: block !important;

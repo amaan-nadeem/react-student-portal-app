@@ -1,5 +1,3 @@
-
-
 const initState = {
     authError: null
 }
